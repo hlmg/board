@@ -10,11 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Entity
 public class Post {
     @Id
@@ -31,4 +32,12 @@ public class Post {
     private Set<Comment> comments = new HashSet<>();
 
     private boolean isDeleted;
+
+    @Builder
+    public Post(String title, String content, Set<Comment> comments, boolean isDeleted) {
+        this.title = title;
+        this.content = content;
+        this.comments = comments;
+        this.isDeleted = isDeleted;
+    }
 }
