@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class CommentController {
     public ResponseEntity<CommentResponse> createComment(@PathVariable("id") Long postId, @RequestBody CommentRequest commentRequest) {
         CommentResponse response = CommentResponse.from(commentService.create(postId, commentRequest));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("/comments/{id}")
+    public ResponseEntity<CommentResponse> updateComment(@PathVariable("id") Long id, @RequestBody CommentRequest commentRequest) {
+        CommentResponse response = CommentResponse.from(commentService.update(id, commentRequest));
+        return ResponseEntity.ok(response);
     }
 }

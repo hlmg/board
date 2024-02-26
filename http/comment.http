@@ -5,3 +5,11 @@ Content-Type: application/json
 {
   "content": "comment1"
 }
+
+###
+PUT http://localhost:8080/comments/1
+Content-Type: application/json
+
+{
+  "content": "modifiedComment"
+}

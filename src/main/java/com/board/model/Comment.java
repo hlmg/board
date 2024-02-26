@@ -33,4 +33,11 @@ public class Comment {
         this.post = post;
         this.isDeleted = isDeleted;
     }
+
+    public void update(String content) {
+        if (isDeleted) {
+            throw new IllegalStateException("이미 삭제된 댓글은 수정할 수 없습니다.");
+        }
+        this.content = content;
+    }
 }

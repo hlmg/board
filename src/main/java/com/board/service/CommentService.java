@@ -33,4 +33,12 @@ public class CommentService {
                 .build();
         return commentRepository.save(comment);
     }
+
+    @Transactional
+    public Comment update(Long id, CommentRequest commentRequest) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("댓글을 찾을 수 없습니다."));
+        comment.update(commentRequest.content());
+        return comment;
+    }
 }
