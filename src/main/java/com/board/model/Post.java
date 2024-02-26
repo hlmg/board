@@ -52,7 +52,7 @@ public class Post {
 
     public void update(String title, String content) {
         if (isDeleted) {
-            throw new IllegalStateException("이미 삭제된 게시글은 수정할 수 없습니다.");
+            throw new IllegalArgumentException("이미 삭제된 게시글은 수정할 수 없습니다.");
         }
         this.title = title;
         this.content = content;

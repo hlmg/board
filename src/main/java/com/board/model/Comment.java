@@ -36,7 +36,7 @@ public class Comment {
 
     public void update(String content) {
         if (isDeleted) {
-            throw new IllegalStateException("이미 삭제된 댓글은 수정할 수 없습니다.");
+            throw new IllegalArgumentException("이미 삭제된 댓글은 수정할 수 없습니다.");
         }
         this.content = content;
     }

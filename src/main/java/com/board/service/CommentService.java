@@ -25,7 +25,7 @@ public class CommentService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NoSuchElementException("게시글을 찾을 수 없습니다."));
         if (post.isDeleted()) {
-            throw new IllegalStateException("삭제된 게시글에 댓글을 작성할 수 없습니다.");
+            throw new IllegalArgumentException("삭제된 게시글에 댓글을 작성할 수 없습니다.");
         }
         Comment comment = Comment.builder()
                 .content(request.content())
