@@ -40,4 +40,8 @@ public class Post {
         this.comments = comments;
         this.isDeleted = isDeleted;
     }
+
+    public void delete() {
+        isDeleted = true;
+    }
 }

@@ -6,3 +6,6 @@ Content-Type: application/json
   "title": "title1",
   "content": "content1"
 }
+
+###
+DELETE http://localhost:8080/posts/1

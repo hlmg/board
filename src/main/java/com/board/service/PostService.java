@@ -1,5 +1,7 @@
 package com.board.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,5 +24,12 @@ public class PostService {
                 .content(request.content())
                 .build();
         return postRepository.save(post);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("게시글을 찾을 수 없습니다."));
+        post.delete();
     }
 }
