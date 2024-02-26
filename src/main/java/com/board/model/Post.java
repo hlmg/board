@@ -1,5 +1,6 @@
 package com.board.model;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,6 +38,9 @@ public class Post {
     public Post(String title, String content, Set<Comment> comments, boolean isDeleted) {
         this.title = title;
         this.content = content;
+        if (comments == null) {
+            comments = Collections.emptySet();
+        }
         this.comments = comments;
         this.isDeleted = isDeleted;
     }
