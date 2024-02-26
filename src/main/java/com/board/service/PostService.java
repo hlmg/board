@@ -1,7 +1,9 @@
 package com.board.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,12 @@ public class PostService {
                 .content(request.content())
                 .build();
         return postRepository.save(post);
+    }
+
+    public List<Post> getAllPost(Pageable pageable) {
+        return postRepository.findAll(pageable).stream()
+                .filter(post -> !post.isDeleted())
+                .toList();
     }
 
     @Transactional
