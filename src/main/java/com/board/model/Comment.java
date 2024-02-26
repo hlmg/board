@@ -28,7 +28,7 @@ public class Comment {
     private boolean isDeleted;
 
     @Builder
-    public Comment(String content, Post post, boolean isDeleted) {
+    private Comment(String content, Post post, boolean isDeleted) {
         this.content = content;
         this.post = post;
         this.isDeleted = isDeleted;

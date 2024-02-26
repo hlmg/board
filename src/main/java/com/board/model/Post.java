@@ -35,7 +35,7 @@ public class Post {
     private boolean isDeleted;
 
     @Builder
-    public Post(String title, String content, Set<Comment> comments, boolean isDeleted) {
+    private Post(String title, String content, Set<Comment> comments, boolean isDeleted) {
         this.title = title;
         this.content = content;
         if (comments == null) {
