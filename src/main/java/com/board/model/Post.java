@@ -47,6 +47,7 @@ public class Post {
 
     public void delete() {
         isDeleted = true;
+        comments.forEach(Comment::delete);
     }
 
     public void update(String title, String content) {
