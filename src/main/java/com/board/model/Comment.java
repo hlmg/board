@@ -40,4 +40,8 @@ public class Comment {
         }
         this.content = content;
     }
+
+    public void delete() {
+        isDeleted = true;
+    }
 }

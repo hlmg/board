@@ -16,6 +16,7 @@ public record PostResponse(
                 post.getTitle(),
                 post.getContent(),
                 post.getComments().stream()
+                        .filter(comment -> !comment.isDeleted())
                         .map(CommentResponse::from)
                         .collect(Collectors.toSet())
         );

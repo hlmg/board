@@ -41,4 +41,11 @@ public class CommentService {
         comment.update(commentRequest.content());
         return comment;
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("댓글을 찾을 수 없습니다."));
+        comment.delete();
+    }
 }
