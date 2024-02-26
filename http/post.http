@@ -9,3 +9,12 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8080/posts/1
+
+###
+PUT http://localhost:8080/posts/1
+Content-Type: application/json
+
+{
+  "title": "modifiedTitle",
+  "content": "modifiedContent"
+}

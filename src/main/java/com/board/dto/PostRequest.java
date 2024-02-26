@@ -1,6 +1,6 @@
 package com.board.dto;
 
-public record PostCreateRequest(
+public record PostRequest(
         String title,
         String content
 ) {
