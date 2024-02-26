@@ -2,7 +2,6 @@ package com.board.controller;
 
 import java.util.List;
 
-import org.hibernate.query.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.board.dto.PostListResponse;
 import com.board.dto.PostRequest;
 import com.board.dto.PostResponse;
-import com.board.dto.PostListResponse;
 import com.board.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,6 +40,12 @@ public class PostController {
                 .stream()
                 .map(PostListResponse::from)
                 .toList();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<PostResponse> getPost(@PathVariable("id") Long id) {
+        PostResponse response = PostResponse.from(postService.getPost(id));
         return ResponseEntity.ok(response);
     }
 

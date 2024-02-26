@@ -34,6 +34,15 @@ public class PostService {
                 .toList();
     }
 
+    public Post getPost(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("게시글을 찾을 수 없습니다."));
+        if (post.isDeleted()) {
+            throw new IllegalStateException("삭제된 게시글은 조회할 수 없습니다.");
+        }
+        return post;
+    }
+
     @Transactional
     public void delete(Long id) {
         Post post = postRepository.findById(id)
