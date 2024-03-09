@@ -20,6 +20,7 @@ import com.board.dto.PostRequest;
 import com.board.dto.PostResponse;
 import com.board.service.PostService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/posts")
-    public PostResponse createPost(@RequestBody PostRequest request) {
+    public PostResponse createPost(@Valid @RequestBody PostRequest request) {
         return PostResponse.from(postService.create(request));
     }
 
@@ -48,7 +49,7 @@ public class PostController {
     }
 
     @PutMapping("/posts/{id}")
-    public PostResponse updatePost(@PathVariable("id") Long id, @RequestBody PostRequest request) {
+    public PostResponse updatePost(@PathVariable("id") Long id, @Valid @RequestBody PostRequest request) {
         return PostResponse.from(postService.update(id, request));
     }
 
