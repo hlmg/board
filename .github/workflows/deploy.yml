@@ -43,4 +43,4 @@ jobs:
           environment_name: Goorm-server-eb-env
           version_label: github-actions-${{github.SHA}}
           region: ap-northeast-2
-          deployment_package: deploy.zip
+          deployment_package: deploy/deploy.zip
