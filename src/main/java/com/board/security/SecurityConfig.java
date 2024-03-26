@@ -20,11 +20,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.GenericFilterBean;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private final JwtService jwtService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,6 +36,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(authenticationFilter(), LoginFilter.class)
                 .addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class)
         ;
 
@@ -41,8 +44,13 @@ public class SecurityConfig {
     }
 
     @Bean
+    public GenericFilterBean authenticationFilter() {
+        return new AuthenticationFilter(jwtService);
+    }
+
+    @Bean
     public AbstractAuthenticationProcessingFilter loginFilter() {
-        LoginFilter loginFilter = new LoginFilter(new JwtService());
+        LoginFilter loginFilter = new LoginFilter(jwtService);
         loginFilter.setAuthenticationManager(authenticationManager());
         return loginFilter;
     }
